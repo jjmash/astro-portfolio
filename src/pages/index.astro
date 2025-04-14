@@ -1,179 +1,283 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Jeff Joseph – Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500&family=PT+Serif&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #111;
-      --card-bg: #fdfdfd;
-    }
-    body.dark {
-      --bg-color: #111;
-      --text-color: #eee;
-      --card-bg: #222;
-    }
-    body {
-      margin: 0;
-      font-family: 'PT Serif', serif;
-      background: var(--bg-color) url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23bbb' fill-opacity='0.05'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
-      color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
-    }
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      border-bottom: 1px solid #ddd;
-      background-color: #fafafa;
-    }
-    .profile-banner {
-      max-height: 280px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    nav {
-      text-align: center;
-      background: #f4f4f4;
-      border-bottom: 1px solid #ccc;
-      padding: 1rem 0;
-    }
-    nav a {
-      margin: 0 1.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--text-color);
-    }
-    #toggle-theme {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.4rem 0.8rem;
-      background: #ddd;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    section {
-      padding: 2rem 1rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    h2 {
-      font-size: 1.8rem;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-      font-family: 'Domine', serif;
-    }
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .article-card {
-      background: var(--card-bg);
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-    }
-    .article-card:hover {
-      transform: translateY(-2px);
-    }
-    .article-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      margin-bottom: 0.8rem;
-    }
-    .article-card a {
-      color: var(--text-color);
-      text-decoration: none;
-    }
-    .article-card a:hover {
-      text-decoration: underline;
-    }
-    .article-source {
-      font-variant: small-caps;
-      font-size: 0.9rem;
-      color: gray;
-    }
-  </style>
-</head>
-<body>
-  <button id="toggle-theme">Toggle Theme</button>
-  <header>
-    <img src="/profile.jpg" class="profile-banner" alt="Profile Photo" />
-    <h1>Jeff Joseph</h1>
-    <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI. Exploring stories at the intersection of environment, community, and policy.</p>
-  </header>
-  <nav>
-    <a href="#articles">Articles</a>
-    <a href="#videos">Videos</a>
-    <a href="#photos">Photos</a>
-  </nav>
+---
+const articles = [
+  {
+    title: "India's massive failure to control pesticide overuse in cardamom and its spice trade",
+    source: "Himal Southasian",
+    url: "https://www.himalmag.com/politics/cardamom-india-spices-ban-pesticide-contamination-idukki-kerala-food-safety"
+  },
+  {
+    title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu",
+    source: "Himal Southasian",
+    url: "https://www.himalmag.com/politics/purse-seine-tamil-nadu-trawlers-fishing-ban-protest-nagapattinam"
+  },
+  {
+    title: "How the fight against a pipeline in Kerala travelled downstream",
+    source: "Scroll.in",
+    url: "https://scroll.in/article/1024070/how-the-fight-against-a-pipeline-in-kerala-travelled-downstream"
+  },
+  {
+    title: "Tribal panchayats in protected areas being illegally converted to municipalities",
+    source: "Frontline",
+    url: "https://frontline.thehindu.com/the-nation/investigation-pushed-even-from-the-margins-tribal-panchayats-in-protected-areas-illegally-being-converted-to-municipalities/article65893689.ece"
+  },
+  {
+    title: "Displaced by settlers: Tribal communities in Kerala’s Attappady block are being alienated from their land",
+    source: "Down To Earth",
+    url: "https://www.downtoearth.org.in/governance/displaced-by-settlers-tribal-communities-in-kerala-s-attappady-block-are-being-alienated-from-their-land-88776"
+  },
+  {
+    title: "Nepal's unescapable trap of migration, farming and climate change",
+    source: "Himal Southasian",
+    url: "https://www.himalmag.com/politics/nepal-himalaya-migration-rural-farming-agriculture-climate-change"
+  }
+];
 
-  <section id="articles">
-    <h2>Articles</h2>
-    <div class="articles-grid" id="article-cards"></div>
-  </section>
+const videos = [
+  {
+    title: "After the Green Age: Repowering Challenges in Tamil Nadu | The Wire",
+    url: "https://www.youtube.com/watch?v=jRXy0S9UCpY&ab_channel=TheWire",
+    thumbnail: "https://img.youtube.com/vi/jRXy0S9UCpY/0.jpg"
+  },
+  {
+    title: "Tamil Nadu's Decade of Stagnation: Wind Energy Awaits Revival in this Once Pioneer State | The Wire",
+    url: "https://www.youtube.com/watch?v=TwfTAW8q2Gg&ab_channel=TheWire",
+    thumbnail: "https://img.youtube.com/vi/TwfTAW8q2Gg/0.jpg"
+  },
+  {
+    title: "How Irulas Are Deprived of Land Rights in Tamil Nadu | The Quint",
+    url: "https://www.youtube.com/watch?v=93kEz-Wimic&ab_channel=TheQuint",
+    thumbnail: "https://img.youtube.com/vi/93kEz-Wimic/0.jpg"
+  },
+  {
+    title: "Cardamom: Stories from Pesticide Hill | Himal Southasian",
+    url: "https://www.youtube.com/watch?v=ixnzPfAuh94&ab_channel=Osupaan",
+    thumbnail: "https://img.youtube.com/vi/ixnzPfAuh94/0.jpg"
+  },
+  {
+    title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu | Himal Southasian",
+    url: "https://www.youtube.com/watch?v=M3i5a5DV6lo&ab_channel=HimalSouthasian",
+    thumbnail: "https://img.youtube.com/vi/M3i5a5DV6lo/0.jpg"
+  },
+  {
+    title: "Nepal's unescapable trap of migration, farming and climate change | Himal Southasian",
+    url: "https://www.youtube.com/watch?v=yyaPJrShNKY&ab_channel=HimalSouthasian",
+    thumbnail: "https://img.youtube.com/vi/yyaPJrShNKY/0.jpg"
+  }
+];
 
-  <script>
-    const articles = [
-      {
-        title: "India's massive failure to control pesticide overuse in cardamom and its spice trade",
-        source: "Himal Southasian",
-        url: "https://www.himalmag.com/politics/cardamom-india-spices-ban-pesticide-contamination-idukki-kerala-food-safety"
-      },
-      {
-        title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu",
-        source: "Himal Southasian",
-        url: "https://www.himalmag.com/politics/purse-seine-tamil-nadu-trawlers-fishing-ban-protest-nagapattinam"
-      },
-      {
-        title: "How the fight against a pipeline in Kerala travelled downstream",
-        source: "Scroll.in",
-        url: "https://scroll.in/article/1024070/how-the-fight-against-a-pipeline-in-kerala-travelled-downstream"
-      },
-      {
-        title: "Tribal panchayats in protected areas being illegally converted to municipalities",
-        source: "Frontline",
-        url: "https://frontline.thehindu.com/the-nation/investigation-pushed-even-from-the-margins-tribal-panchayats-in-protected-areas-illegally-being-converted-to-municipalities/article65893689.ece"
-      },
-      {
-        title: "Displaced by settlers: Tribal communities in Kerala’s Attappady block are being alienated from their land",
-        source: "Down To Earth",
-        url: "https://www.downtoearth.org.in/governance/displaced-by-settlers-tribal-communities-in-kerala-s-attappady-block-are-being-alienated-from-their-land-88776"
-      },
-      {
-        title: "Nepal's unescapable trap of migration, farming and climate change",
-        source: "Himal Southasian",
-        url: "https://www.himalmag.com/politics/nepal-himalaya-migration-rural-farming-agriculture-climate-change"
+const photos = [
+  "/photos/IMD_1.jpg",
+  "/photos/IMD_2.jpg",
+  "/photos/IMD_3.jpg",
+  "/photos/IMD_4.jpg",
+  "/photos/IMD_5.jpg",
+  "/photos/IMD_6.jpg"
+];
+---
+
+<html>
+  <head>
+    <title>Jeff Joseph – Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: 'Georgia', serif;
+        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='white'/%3E%3Cpath d='M40 0H0v1h40V0zm0 39H0v1h40v-1zM0 0v40h1V0H0zm39 0v40h1V0h-1z' fill='%23ccc' fill-opacity='0.15'/%3E%3C/svg%3E") repeat;
+        color: #111;
+        margin: 0;
+        padding: 0;
       }
-    ];
+      header {
+        text-align: center;
+        padding: 2rem 1rem;
+        background-color: #fafafa;
+        border-bottom: 1px solid #ddd;
+      }
+      .profile-banner {
+        max-height: 280px;
+        width: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      nav {
+        text-align: center;
+        background: #f4f4f4;
+        border-bottom: 1px solid #ccc;
+        padding: 1rem 0;
+      }
+      nav a {
+        margin: 0 1.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        color: #222;
+        font-size: 1.1rem;
+        position: relative;
+      }
+      nav a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #000;
+        transition: width .3s;
+        margin-top: 2px;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      section {
+        padding: 2rem 1rem;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      h2 {
+        font-size: 1.8rem;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-family: 'Georgia', serif;
+      }
+      .article-list {
+        list-style: none;
+        padding: 0;
+      }
+      .article-list li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        margin-bottom: 1.75rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+      .article-list img {
+        width: 120px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      }
+      .article-list a {
+        color: #000;
+        text-decoration: none;
+      }
+      .article-list a:hover {
+        text-decoration: underline;
+      }
+      .videos, .photos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .video img, .photos img {
+        width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .video p {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #000;
+      }
+      .photos figure {
+        margin: 0;
+      }
+      .photos figcaption {
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+      }
+      #lightbox {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+      }
+      #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+      }
+      @media (max-width: 768px) {
+        nav a { margin: 0 0.8rem; font-size: 1rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="/profile.jpg" class="profile-banner" alt="Profile Photo">
+      <h1>Jeff Joseph</h1>
+      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI.</p>
+    </header>
 
-    const container = document.getElementById("article-cards");
-    articles.forEach(article => {
-      const card = document.createElement("div");
-      card.className = "article-card";
-      const thumbnail = `https://image.thum.io/get/width/600/crop/600/${article.url}`;
-      card.innerHTML = `
-        <a href="${article.url}" target="_blank">
-          <img src="${thumbnail}" alt="${article.title}" loading="lazy" />
-          <strong>${article.title}</strong><br />
-          <span class="article-source">${article.source}</span>
-        </a>
-      `;
-      container.appendChild(card);
-    });
+    <nav>
+      <a href="#articles">Articles</a>
+      <a href="#videos">Videos</a>
+      <a href="#photos">Photos</a>
+    </nav>
 
-    document.getElementById("toggle-theme").onclick = () => {
-      document.body.classList.toggle("dark");
-    };
-  </script>
-</body>
+    <section id="articles">
+      <h2>Articles</h2>
+      <ul class="article-list">
+        {articles.map(article => (
+          <li>
+            <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt={article.title} loading="lazy" />
+            <div>
+              <a href={article.url} target="_blank">
+                <strong>{article.title}</strong><br />
+                <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section id="videos">
+      <h2>Videos</h2>
+      <div class="videos">
+        {videos.map(video => (
+          <div class="video">
+            <a href={video.url} target="_blank">
+              <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              <p>{video.title}</p>
+              <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
+                {video.url.includes('youtube.com') ? 'YouTube' : 'Video'}
+              </span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="photos">
+      <h2>Photos</h2>
+      <div class="photos">
+        {photos.map(photo => (
+          <figure>
+            <img src={photo} alt="Portfolio Photo" loading="lazy" onclick="openModal(this.src)" />
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <div id="lightbox" onclick="closeModal()">
+      <img id="lightbox-img" />
+    </div>
+
+    <script>
+      function openModal(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightbox.style.display = 'flex';
+        lightboxImg.src = src;
+      }
+      function closeModal() {
+        document.getElementById('lightbox').style.display = 'none';
+      }
+    </script>
+  </body>
 </html>
