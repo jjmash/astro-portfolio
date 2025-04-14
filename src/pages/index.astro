@@ -64,28 +64,34 @@ const videos = [
     thumbnail: "https://img.youtube.com/vi/yyaPJrShNKY/0.jpg"
   }
 ];
-const photos = ["IMD_1.jpg", "IMD_2.jpg", "IMD_3.jpg", "IMD_4.jpg", "IMD_5.jpg", "IMD_6.jpg"];
+
+const photos = [
+  "/photos/IMD_1.jpg",
+  "/photos/IMD_2.jpg",
+  "/photos/IMD_3.jpg",
+  "/photos/IMD_4.jpg",
+  "/photos/IMD_5.jpg",
+  "/photos/IMD_6.jpg"
+];
 ---
 
 <html>
   <head>
     <title>Jeff Joseph – Portfolio</title>
-    <link rel="stylesheet" href="/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       body {
         font-family: 'Georgia', serif;
-        background: white url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ccc' fill-opacity='0.3'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
+        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='white'/%3E%3Cpath d='M40 0H0v1h40V0zm0 39H0v1h40v-1zM0 0v40h1V0H0zm39 0v40h1V0h-1z' fill='%23ccc' fill-opacity='0.15'/%3E%3C/svg%3E") repeat;
         color: #111;
-        line-height: 1.6;
         margin: 0;
         padding: 0;
       }
       header {
         text-align: center;
         padding: 2rem 1rem;
-        border-bottom: 1px solid #ddd;
         background-color: #fafafa;
+        border-bottom: 1px solid #ddd;
       }
       .profile-banner {
         max-height: 280px;
@@ -136,12 +142,21 @@ const photos = ["IMD_1.jpg", "IMD_2.jpg", "IMD_3.jpg", "IMD_4.jpg", "IMD_5.jpg",
         padding: 0;
       }
       .article-list li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
         margin-bottom: 1.75rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid #eee;
       }
+      .article-list img {
+        width: 120px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      }
       .article-list a {
-        color: #222;
+        color: #000;
         text-decoration: none;
       }
       .article-list a:hover {
@@ -160,7 +175,8 @@ const photos = ["IMD_1.jpg", "IMD_2.jpg", "IMD_3.jpg", "IMD_4.jpg", "IMD_5.jpg",
       .video p {
         margin-top: 0.5rem;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
+        color: #000;
       }
       .photos figure {
         margin: 0;
@@ -191,64 +207,67 @@ const photos = ["IMD_1.jpg", "IMD_2.jpg", "IMD_3.jpg", "IMD_4.jpg", "IMD_5.jpg",
     </style>
   </head>
   <body>
-    <header class="header">
+    <header>
       <img src="/profile.jpg" class="profile-banner" alt="Profile Photo">
       <h1>Jeff Joseph</h1>
-      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI. Exploring stories at the intersection of environment, community, and policy.</p>
+      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI.</p>
     </header>
+
     <nav>
       <a href="#articles">Articles</a>
       <a href="#videos">Videos</a>
       <a href="#photos">Photos</a>
     </nav>
+
     <section id="articles">
       <h2>Articles</h2>
       <ul class="article-list">
-  {articles.map(article => (
-    <li style="display: flex; gap: 1rem; align-items: flex-start;">
-      <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt="{article.title}" style="width: 120px; height: auto; object-fit: cover; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" />
-      <div>
-        <a href={article.url} target="_blank">
-          <strong>{article.title}</strong><br />
-          <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
-        </a>
-      </div>
-    </li>
-  ))}
-</ul>
+        {articles.map(article => (
+          <li>
+            <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt={article.title} loading="lazy" />
+            <div>
+              <a href={article.url} target="_blank">
+                <strong>{article.title}</strong><br />
+                <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
+
     <section id="videos">
       <h2>Videos</h2>
       <div class="videos">
-  {videos.map(video => (
-    <div class="video">
-      <a href={video.url} target="_blank">
-        <img src={video.thumbnail} alt={video.title} />
-        <p>{video.title}</p>
-        <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
-          {video.url.includes('youtube.com') ? 'YouTube' : video.url.includes('thewire.in') ? 'The Wire' : 'Video'}
-        </span>
-      </a>
-    </div>
-  ))}
-</div>
+        {videos.map(video => (
+          <div class="video">
+            <a href={video.url} target="_blank">
+              <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              <p>{video.title}</p>
+              <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
+                {video.url.includes('youtube.com') ? 'YouTube' : 'Video'}
+              </span>
+            </a>
+          </div>
         ))}
       </div>
     </section>
+
     <section id="photos">
       <h2>Photos</h2>
       <div class="photos">
         {photos.map(photo => (
           <figure>
-            <img src={photo.src} alt="Portfolio Photo" onclick="openModal(this.src)" />
-            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+            <img src={photo} alt="Portfolio Photo" loading="lazy" onclick="openModal(this.src)" />
           </figure>
         ))}
       </div>
     </section>
+
     <div id="lightbox" onclick="closeModal()">
       <img id="lightbox-img" />
     </div>
+
     <script>
       function openModal(src) {
         const lightbox = document.getElementById('lightbox');
