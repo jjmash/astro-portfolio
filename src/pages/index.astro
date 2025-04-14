@@ -1,5 +1,4 @@
 ---
-// JavaScript-like frontmatter with data
 const articles = [
   {
     title: "India's massive failure to control pesticide overuse in cardamom and its spice trade",
@@ -65,73 +64,201 @@ const videos = [
     thumbnail: "https://img.youtube.com/vi/yyaPJrShNKY/0.jpg"
   }
 ];
-
-const photos = [
-  "/photos/IMG_1.jpg",
-  "/photos/IMG_2.jpg",
-  "/photos/IMG_3.jpg",
-  "/photos/IMG_4.jpg",
-  "/photos/IMG_5.jpg",
-  "/photos/IMG_6.jpg"
-];
+const photos = [...];
 ---
 
 <html>
   <head>
     <title>Jeff Joseph – Portfolio</title>
     <link rel="stylesheet" href="/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: 'Georgia', serif;
+        background: white url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ccc' fill-opacity='0.3'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
+        color: #111;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        text-align: center;
+        padding: 2rem 1rem;
+        border-bottom: 1px solid #ddd;
+        background-color: #fafafa;
+      }
+      .profile-banner {
+        max-height: 280px;
+        width: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      nav {
+        text-align: center;
+        background: #f4f4f4;
+        border-bottom: 1px solid #ccc;
+        padding: 1rem 0;
+      }
+      nav a {
+        margin: 0 1.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        color: #222;
+        font-size: 1.1rem;
+        position: relative;
+      }
+      nav a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #000;
+        transition: width .3s;
+        margin-top: 2px;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      section {
+        padding: 2rem 1rem;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      h2 {
+        font-size: 1.8rem;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-family: 'Georgia', serif;
+      }
+      .article-list {
+        list-style: none;
+        padding: 0;
+      }
+      .article-list li {
+        margin-bottom: 1.75rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+      .article-list a {
+        color: #222;
+        text-decoration: none;
+      }
+      .article-list a:hover {
+        text-decoration: underline;
+      }
+      .videos, .photos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .video img, .photos img {
+        width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .video p {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .photos figure {
+        margin: 0;
+      }
+      .photos figcaption {
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+      }
+      #lightbox {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+      }
+      #lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+      }
+      @media (max-width: 768px) {
+        nav a { margin: 0 0.8rem; font-size: 1rem; }
+      }
+    </style>
   </head>
   <body>
     <header class="header">
- <img 
-        src="/profile.jpg" 
-        alt="Jeff Joseph" 
-        style="width: 100%; max-width: 300px; height: auto; border: 1px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
-      /> 
+      <img src="/profile.jpg" class="profile-banner" alt="Profile Photo">
       <h1>Jeff Joseph</h1>
-      <p>Award Winning Journalist and visual storyteller. Exploring stories at the intersection of environment, community, and policy.</p>
+      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI. Exploring stories at the intersection of environment, community, and policy.</p>
     </header>
     <nav>
       <a href="#articles">Articles</a>
       <a href="#videos">Videos</a>
       <a href="#photos">Photos</a>
     </nav>
-
     <section id="articles">
       <h2>Articles</h2>
       <ul class="article-list">
-        {articles.map(article => (
-          <li>
-            <a href={article.url} target="_blank">
-              <strong>{article.title}</strong><br />
-              <em>{article.source}</em>
-            </a>
-          </li>
-        ))}
-      </ul>
+  {articles.map(article => (
+    <li style="display: flex; gap: 1rem; align-items: flex-start;">
+      <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt="{article.title}" style="width: 120px; height: auto; object-fit: cover; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" />
+      <div>
+        <a href={article.url} target="_blank">
+          <strong>{article.title}</strong><br />
+          <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
+        </a>
+      </div>
+    </li>
+  ))}
+</ul>
     </section>
-
     <section id="videos">
       <h2>Videos</h2>
       <div class="videos">
-        {videos.map(video => (
-          <div class="video">
-            <a href={video.url} target="_blank">
-              <img src={video.thumbnail} alt={video.title} />
-              <p>{video.title}</p>
-            </a>
-          </div>
+  {videos.map(video => (
+    <div class="video">
+      <a href={video.url} target="_blank">
+        <img src={video.thumbnail} alt={video.title} />
+        <p>{video.title}</p>
+        <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
+          {video.url.includes('youtube.com') ? 'YouTube' : video.url.includes('thewire.in') ? 'The Wire' : 'Video'}
+        </span>
+      </a>
+    </div>
+  ))}
+</div>
         ))}
       </div>
     </section>
-
     <section id="photos">
       <h2>Photos</h2>
       <div class="photos">
         {photos.map(photo => (
-          <img src={photo} alt="Portfolio Photo" />
+          <figure>
+            <img src={photo.src} alt="Portfolio Photo" onclick="openModal(this.src)" />
+            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+          </figure>
         ))}
       </div>
     </section>
+    <div id="lightbox" onclick="closeModal()">
+      <img id="lightbox-img" />
+    </div>
+    <script>
+      function openModal(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightbox.style.display = 'flex';
+        lightboxImg.src = src;
+      }
+      function closeModal() {
+        document.getElementById('lightbox').style.display = 'none';
+      }
+    </script>
   </body>
 </html>
