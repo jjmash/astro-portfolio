@@ -1,211 +1,179 @@
-<html>
-  <head>
-    <title>Jeff Joseph – Portfolio</title>
-    <link rel="stylesheet" href="/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&family=PT+Serif:wght@400;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jeff Joseph – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@500&family=PT+Serif&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111;
+      --card-bg: #fdfdfd;
+    }
+    body.dark {
+      --bg-color: #111;
+      --text-color: #eee;
+      --card-bg: #222;
+    }
+    body {
+      margin: 0;
+      font-family: 'PT Serif', serif;
+      background: var(--bg-color) url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23bbb' fill-opacity='0.05'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid #ddd;
+      background-color: #fafafa;
+    }
+    .profile-banner {
+      max-height: 280px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    nav {
+      text-align: center;
+      background: #f4f4f4;
+      border-bottom: 1px solid #ccc;
+      padding: 1rem 0;
+    }
+    nav a {
+      margin: 0 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    #toggle-theme {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: #ddd;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 1.8rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Domine', serif;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .article-card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-2px);
+    }
+    .article-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin-bottom: 0.8rem;
+    }
+    .article-card a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+    .article-card a:hover {
+      text-decoration: underline;
+    }
+    .article-source {
+      font-variant: small-caps;
+      font-size: 0.9rem;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <button id="toggle-theme">Toggle Theme</button>
+  <header>
+    <img src="/profile.jpg" class="profile-banner" alt="Profile Photo" />
+    <h1>Jeff Joseph</h1>
+    <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI. Exploring stories at the intersection of environment, community, and policy.</p>
+  </header>
+  <nav>
+    <a href="#articles">Articles</a>
+    <a href="#videos">Videos</a>
+    <a href="#photos">Photos</a>
+  </nav>
 
-      :root {
-        --bg-color: #ffffff;
-        --text-color: #111;
-        --card-bg: #fff;
-        --grid-line: #eee;
-        --header-bg: #fafafa;
-        --link-color: #222;
+  <section id="articles">
+    <h2>Articles</h2>
+    <div class="articles-grid" id="article-cards"></div>
+  </section>
+
+  <script>
+    const articles = [
+      {
+        title: "India's massive failure to control pesticide overuse in cardamom and its spice trade",
+        source: "Himal Southasian",
+        url: "https://www.himalmag.com/politics/cardamom-india-spices-ban-pesticide-contamination-idukki-kerala-food-safety"
+      },
+      {
+        title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu",
+        source: "Himal Southasian",
+        url: "https://www.himalmag.com/politics/purse-seine-tamil-nadu-trawlers-fishing-ban-protest-nagapattinam"
+      },
+      {
+        title: "How the fight against a pipeline in Kerala travelled downstream",
+        source: "Scroll.in",
+        url: "https://scroll.in/article/1024070/how-the-fight-against-a-pipeline-in-kerala-travelled-downstream"
+      },
+      {
+        title: "Tribal panchayats in protected areas being illegally converted to municipalities",
+        source: "Frontline",
+        url: "https://frontline.thehindu.com/the-nation/investigation-pushed-even-from-the-margins-tribal-panchayats-in-protected-areas-illegally-being-converted-to-municipalities/article65893689.ece"
+      },
+      {
+        title: "Displaced by settlers: Tribal communities in Kerala’s Attappady block are being alienated from their land",
+        source: "Down To Earth",
+        url: "https://www.downtoearth.org.in/governance/displaced-by-settlers-tribal-communities-in-kerala-s-attappady-block-are-being-alienated-from-their-land-88776"
+      },
+      {
+        title: "Nepal's unescapable trap of migration, farming and climate change",
+        source: "Himal Southasian",
+        url: "https://www.himalmag.com/politics/nepal-himalaya-migration-rural-farming-agriculture-climate-change"
       }
+    ];
 
-      [data-theme='dark'] {
-        --bg-color: #121212;
-        --text-color: #eee;
-        --card-bg: #1e1e1e;
-        --grid-line: #333;
-        --header-bg: #1a1a1a;
-        --link-color: #ddd;
-      }
+    const container = document.getElementById("article-cards");
+    articles.forEach(article => {
+      const card = document.createElement("div");
+      card.className = "article-card";
+      const thumbnail = `https://image.thum.io/get/width/600/crop/600/${article.url}`;
+      card.innerHTML = `
+        <a href="${article.url}" target="_blank">
+          <img src="${thumbnail}" alt="${article.title}" loading="lazy" />
+          <strong>${article.title}</strong><br />
+          <span class="article-source">${article.source}</span>
+        </a>
+      `;
+      container.appendChild(card);
+    });
 
-      body {
-        font-family: 'PT Serif', serif;
-        background-color: var(--bg-color);
-        background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, var(--grid-line) 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, var(--grid-line) 20px);
-        background-size: 20px 20px;
-        color: var(--text-color);
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      header {
-        text-align: center;
-        padding: 2rem 1rem;
-        border-bottom: 1px solid #ddd;
-        background-color: var(--header-bg);
-      }
-
-      .profile-banner {
-        max-height: 280px;
-        width: auto;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      }
-
-      nav {
-        text-align: center;
-        background: #f4f4f4;
-        border-bottom: 1px solid #ccc;
-        padding: 1rem 0;
-      }
-
-      nav a {
-        margin: 0 1.5rem;
-        text-decoration: none;
-        font-weight: 600;
-        color: var(--link-color);
-        font-size: 1.1rem;
-        position: relative;
-      }
-
-      nav a::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: #000;
-        transition: width .3s;
-        margin-top: 2px;
-      }
-
-      nav a:hover::after {
-        width: 100%;
-      }
-
-      #themeToggle {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: transparent;
-        border: 1px solid #888;
-        border-radius: 5px;
-        padding: 0.4rem 0.6rem;
-        font-size: 0.85rem;
-        cursor: pointer;
-      }
-
-      section {
-        padding: 2rem 1rem;
-        max-width: 960px;
-        margin: 0 auto;
-      }
-
-      h2 {
-        font-size: 1.8rem;
-        border-bottom: 2px solid #ddd;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'Domine', serif;
-      }
-
-      .article-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .article-card {
-        background: var(--card-bg);
-        border-radius: 8px;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.2s;
-      }
-
-      .article-card:hover {
-        transform: translateY(-4px);
-      }
-
-      .article-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-      }
-
-      .article-card .content {
-        padding: 1rem;
-      }
-
-      .article-card a {
-        color: var(--link-color);
-        text-decoration: none;
-      }
-
-      .article-card strong {
-        font-weight: bold;
-        font-size: 1.1rem;
-      }
-
-      .videos, .photos {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .video img, .photos img {
-        width: 100%;
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      }
-
-      .video p {
-        margin-top: 0.5rem;
-        font-size: 1rem;
-        font-weight: 700;
-        color: black;
-      }
-
-      .photos figure {
-        margin: 0;
-      }
-
-      .photos figcaption {
-        text-align: center;
-        font-size: 0.9rem;
-        margin-top: 0.4rem;
-      }
-
-      #lightbox {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 999;
-      }
-
-      #lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 10px;
-      }
-
-      @media (max-width: 768px) {
-        nav a { margin: 0 0.8rem; font-size: 1rem; }
-      }
-    </style>
-  </head>
-  <body data-theme="light">
-    <button id="themeToggle">Toggle Theme</button>
-
-    <script>
-      const toggle = document.getElementById('themeToggle');
-      toggle.addEventListener('click', () => {
-        const current = document.body.getAttribute('data-theme');
-        document.body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
-      });
-    </script>
-  </body>
+    document.getElementById("toggle-theme").onclick = () => {
+      document.body.classList.toggle("dark");
+    };
+  </script>
+</body>
 </html>
