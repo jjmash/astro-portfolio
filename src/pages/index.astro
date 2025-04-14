@@ -1,118 +1,71 @@
----
-const articles = [
-  {
-    title: "India's massive failure to control pesticide overuse in cardamom and its spice trade",
-    source: "Himal Southasian",
-    url: "https://www.himalmag.com/politics/cardamom-india-spices-ban-pesticide-contamination-idukki-kerala-food-safety"
-  },
-  {
-    title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu",
-    source: "Himal Southasian",
-    url: "https://www.himalmag.com/politics/purse-seine-tamil-nadu-trawlers-fishing-ban-protest-nagapattinam"
-  },
-  {
-    title: "How the fight against a pipeline in Kerala travelled downstream",
-    source: "Scroll.in",
-    url: "https://scroll.in/article/1024070/how-the-fight-against-a-pipeline-in-kerala-travelled-downstream"
-  },
-  {
-    title: "Tribal panchayats in protected areas being illegally converted to municipalities",
-    source: "Frontline",
-    url: "https://frontline.thehindu.com/the-nation/investigation-pushed-even-from-the-margins-tribal-panchayats-in-protected-areas-illegally-being-converted-to-municipalities/article65893689.ece"
-  },
-  {
-    title: "Displaced by settlers: Tribal communities in Kerala’s Attappady block are being alienated from their land",
-    source: "Down To Earth",
-    url: "https://www.downtoearth.org.in/governance/displaced-by-settlers-tribal-communities-in-kerala-s-attappady-block-are-being-alienated-from-their-land-88776"
-  },
-  {
-    title: "Nepal's unescapable trap of migration, farming and climate change",
-    source: "Himal Southasian",
-    url: "https://www.himalmag.com/politics/nepal-himalaya-migration-rural-farming-agriculture-climate-change"
-  }
-];
-
-const videos = [
-  {
-    title: "After the Green Age: Repowering Challenges in Tamil Nadu | The Wire",
-    url: "https://www.youtube.com/watch?v=jRXy0S9UCpY&ab_channel=TheWire",
-    thumbnail: "https://img.youtube.com/vi/jRXy0S9UCpY/0.jpg"
-  },
-  {
-    title: "Tamil Nadu's Decade of Stagnation: Wind Energy Awaits Revival in this Once Pioneer State | The Wire",
-    url: "https://www.youtube.com/watch?v=TwfTAW8q2Gg&ab_channel=TheWire",
-    thumbnail: "https://img.youtube.com/vi/TwfTAW8q2Gg/0.jpg"
-  },
-  {
-    title: "How Irulas Are Deprived of Land Rights in Tamil Nadu | The Quint",
-    url: "https://www.youtube.com/watch?v=93kEz-Wimic&ab_channel=TheQuint",
-    thumbnail: "https://img.youtube.com/vi/93kEz-Wimic/0.jpg"
-  },
-  {
-    title: "Cardamom: Stories from Pesticide Hill | Himal Southasian",
-    url: "https://www.youtube.com/watch?v=ixnzPfAuh94&ab_channel=Osupaan",
-    thumbnail: "https://img.youtube.com/vi/ixnzPfAuh94/0.jpg"
-  },
-  {
-    title: "Purse-seiners, trawlers, and the epic fight over fishing in Tamil Nadu | Himal Southasian",
-    url: "https://www.youtube.com/watch?v=M3i5a5DV6lo&ab_channel=HimalSouthasian",
-    thumbnail: "https://img.youtube.com/vi/M3i5a5DV6lo/0.jpg"
-  },
-  {
-    title: "Nepal's unescapable trap of migration, farming and climate change | Himal Southasian",
-    url: "https://www.youtube.com/watch?v=yyaPJrShNKY&ab_channel=HimalSouthasian",
-    thumbnail: "https://img.youtube.com/vi/yyaPJrShNKY/0.jpg"
-  }
-];
-
-const photos = [
-  "/photos/IMD_1.jpg",
-  "/photos/IMD_2.jpg",
-  "/photos/IMD_3.jpg",
-  "/photos/IMD_4.jpg",
-  "/photos/IMD_5.jpg",
-  "/photos/IMD_6.jpg"
-];
----
-
 <html>
   <head>
     <title>Jeff Joseph – Portfolio</title>
+    <link rel="stylesheet" href="/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&family=PT+Serif:wght@400;700&display=swap');
+
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #111;
+        --card-bg: #fff;
+        --grid-line: #eee;
+        --header-bg: #fafafa;
+        --link-color: #222;
+      }
+
+      [data-theme='dark'] {
+        --bg-color: #121212;
+        --text-color: #eee;
+        --card-bg: #1e1e1e;
+        --grid-line: #333;
+        --header-bg: #1a1a1a;
+        --link-color: #ddd;
+      }
+
       body {
-        font-family: 'Georgia', serif;
-        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='white'/%3E%3Cpath d='M40 0H0v1h40V0zm0 39H0v1h40v-1zM0 0v40h1V0H0zm39 0v40h1V0h-1z' fill='%23ccc' fill-opacity='0.15'/%3E%3C/svg%3E") repeat;
-        color: #111;
+        font-family: 'PT Serif', serif;
+        background-color: var(--bg-color);
+        background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, var(--grid-line) 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, var(--grid-line) 20px);
+        background-size: 20px 20px;
+        color: var(--text-color);
+        line-height: 1.6;
         margin: 0;
         padding: 0;
+        transition: background-color 0.3s, color 0.3s;
       }
+
       header {
         text-align: center;
         padding: 2rem 1rem;
-        background-color: #fafafa;
         border-bottom: 1px solid #ddd;
+        background-color: var(--header-bg);
       }
+
       .profile-banner {
         max-height: 280px;
         width: auto;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       }
+
       nav {
         text-align: center;
         background: #f4f4f4;
         border-bottom: 1px solid #ccc;
         padding: 1rem 0;
       }
+
       nav a {
         margin: 0 1.5rem;
         text-decoration: none;
         font-weight: 600;
-        color: #222;
+        color: var(--link-color);
         font-size: 1.1rem;
         position: relative;
       }
+
       nav a::after {
         content: '';
         display: block;
@@ -122,70 +75,106 @@ const photos = [
         transition: width .3s;
         margin-top: 2px;
       }
+
       nav a:hover::after {
         width: 100%;
       }
+
+      #themeToggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: 1px solid #888;
+        border-radius: 5px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+
       section {
         padding: 2rem 1rem;
         max-width: 960px;
         margin: 0 auto;
       }
+
       h2 {
         font-size: 1.8rem;
         border-bottom: 2px solid #ddd;
         padding-bottom: 0.5rem;
         margin-bottom: 1.5rem;
-        font-family: 'Georgia', serif;
+        font-family: 'Domine', serif;
       }
-      .article-list {
-        list-style: none;
-        padding: 0;
+
+      .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
       }
-      .article-list li {
+
+      .article-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
         display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-        margin-bottom: 1.75rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
+        flex-direction: column;
+        transition: transform 0.2s;
       }
-      .article-list img {
-        width: 120px;
+
+      .article-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .article-card img {
+        width: 100%;
+        height: 180px;
         object-fit: cover;
-        border-radius: 4px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       }
-      .article-list a {
-        color: #000;
+
+      .article-card .content {
+        padding: 1rem;
+      }
+
+      .article-card a {
+        color: var(--link-color);
         text-decoration: none;
       }
-      .article-list a:hover {
-        text-decoration: underline;
+
+      .article-card strong {
+        font-weight: bold;
+        font-size: 1.1rem;
       }
+
       .videos, .photos {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1.5rem;
       }
+
       .video img, .photos img {
         width: 100%;
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       }
+
       .video p {
         margin-top: 0.5rem;
         font-size: 1rem;
-        font-weight: 600;
-        color: #000;
+        font-weight: 700;
+        color: black;
       }
+
       .photos figure {
         margin: 0;
       }
+
       .photos figcaption {
         text-align: center;
         font-size: 0.9rem;
         margin-top: 0.4rem;
       }
+
       #lightbox {
         display: none;
         justify-content: center;
@@ -196,88 +185,27 @@ const photos = [
         background: rgba(0, 0, 0, 0.8);
         z-index: 999;
       }
+
       #lightbox img {
         max-width: 90%;
         max-height: 90%;
         border-radius: 10px;
       }
+
       @media (max-width: 768px) {
         nav a { margin: 0 0.8rem; font-size: 1rem; }
       }
     </style>
   </head>
-  <body>
-    <header>
-      <img src="/profile.jpg" class="profile-banner" alt="Profile Photo">
-      <h1>Jeff Joseph</h1>
-      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI.</p>
-    </header>
-
-    <nav>
-      <a href="#articles">Articles</a>
-      <a href="#videos">Videos</a>
-      <a href="#photos">Photos</a>
-    </nav>
-
-    <section id="articles">
-      <h2>Articles</h2>
-      <ul class="article-list">
-        {articles.map(article => (
-          <li>
-            <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt={article.title} loading="lazy" />
-            <div>
-              <a href={article.url} target="_blank">
-                <strong>{article.title}</strong><br />
-                <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section id="videos">
-      <h2>Videos</h2>
-      <div class="videos">
-        {videos.map(video => (
-          <div class="video">
-            <a href={video.url} target="_blank">
-              <img src={video.thumbnail} alt={video.title} loading="lazy" />
-              <p>{video.title}</p>
-              <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
-                {video.url.includes('youtube.com') ? 'YouTube' : 'Video'}
-              </span>
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section id="photos">
-      <h2>Photos</h2>
-      <div class="photos">
-        {photos.map(photo => (
-          <figure>
-            <img src={photo} alt="Portfolio Photo" loading="lazy" onclick="openModal(this.src)" />
-          </figure>
-        ))}
-      </div>
-    </section>
-
-    <div id="lightbox" onclick="closeModal()">
-      <img id="lightbox-img" />
-    </div>
+  <body data-theme="light">
+    <button id="themeToggle">Toggle Theme</button>
 
     <script>
-      function openModal(src) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightbox.style.display = 'flex';
-        lightboxImg.src = src;
-      }
-      function closeModal() {
-        document.getElementById('lightbox').style.display = 'none';
-      }
+      const toggle = document.getElementById('themeToggle');
+      toggle.addEventListener('click', () => {
+        const current = document.body.getAttribute('data-theme');
+        document.body.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+      });
     </script>
   </body>
 </html>
