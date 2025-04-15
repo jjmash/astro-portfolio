@@ -253,31 +253,71 @@ const photos = [
       </div>
     </section>
 
-    <section id="photos">
-      <h2>Photos</h2>
-      <div class="photos">
-        {photos.map(photo => (
-          <figure>
-            <img src={photo} alt="Portfolio Photo" loading="lazy" onclick="openModal(this.src)" />
-          </figure>
-        ))}
-      </div>
-    </section>
+  <section id="photos">
+  <h2>Photos</h2>
+  <div class="photos" id="photo-gallery"></div>
+</section>
 
-    <div id="lightbox" onclick="closeModal()">
-      <img id="lightbox-img" />
-    </div>
+<div id="lightbox" onclick="closeModal()">
+  <img id="lightbox-img" />
+</div>
 
-    <script>
-      function openModal(src) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        lightbox.style.display = 'flex';
-        lightboxImg.src = src;
-      }
-      function closeModal() {
-        document.getElementById('lightbox').style.display = 'none';
-      }
+<script>
+  // Dynamically load photos from public/photos/IMG_1.jpg to IMG_10.jpg
+  const totalPhotos = 10; // change this number to match your actual count
+  const gallery = document.getElementById('photo-gallery');
+
+  for (let i = 1; i <= totalPhotos; i++) {
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = `./photos/IMG_${i}.jpg`;
+    img.alt = `Portfolio Photo ${i}`;
+    img.loading = 'lazy';
+    img.onclick = () => openModal(img.src);
+    figure.appendChild(img);
+    gallery.appendChild(figure);
+  }
+
+  function openModal(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+</script>
+
+<style>
+  .photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .photos img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  #lightbox {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+  }
+  #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+  }
+</style>
     </script>
   </body>
 </html>
