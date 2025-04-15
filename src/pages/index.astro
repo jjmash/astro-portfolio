@@ -75,208 +75,41 @@ const photos = [
 ];
 ---
 
-<html>
-  <head>
-    <title>Jeff Joseph – Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body {
-        font-family: 'Georgia', serif;
-        background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='white'/%3E%3Cpath d='M40 0H0v1h40V0zm0 39H0v1h40v-1zM0 0v40h1V0H0zm39 0v40h1V0h-1z' fill='%23ccc' fill-opacity='0.15'/%3E%3C/svg%3E") repeat;
-        color: #111;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        text-align: center;
-        padding: 2rem 1rem;
-        background-color: #fafafa;
-        border-bottom: 1px solid #ddd;
-      }
-      .profile-banner {
-        max-height: 280px;
-        width: auto;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      }
-      nav {
-        text-align: center;
-        background: #f4f4f4;
-        border-bottom: 1px solid #ccc;
-        padding: 1rem 0;
-      }
-      nav a {
-        margin: 0 1.5rem;
-        text-decoration: none;
-        font-weight: 600;
-        color: #222;
-        font-size: 1.1rem;
-        position: relative;
-      }
-      nav a::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: #000;
-        transition: width .3s;
-        margin-top: 2px;
-      }
-      nav a:hover::after {
-        width: 100%;
-      }
-      section {
-        padding: 2rem 1rem;
-        max-width: 960px;
-        margin: 0 auto;
-      }
-      h2 {
-        font-size: 1.8rem;
-        border-bottom: 2px solid #ddd;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'Georgia', serif;
-      }
-      .article-list {
-        list-style: none;
-        padding: 0;
-      }
-      .article-list li {
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-        margin-bottom: 1.75rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
-      }
-      .article-list img {
-        width: 120px;
-        object-fit: cover;
-        border-radius: 4px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      }
-      .article-list a {
-        color: #000;
-        text-decoration: none;
-      }
-      .article-list a:hover {
-        text-decoration: underline;
-      }
-      .videos, .photos {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-      .video img, .photos img {
-        width: 100%;
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      }
-      .video p {
-        margin-top: 0.5rem;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #000;
-      }
-      .photos figure {
-        margin: 0;
-      }
-      .photos figcaption {
-        text-align: center;
-        font-size: 0.9rem;
-        margin-top: 0.4rem;
-      }
-      #lightbox {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 999;
-      }
-      #lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 10px;
-      }
-      @media (max-width: 768px) {
-        nav a { margin: 0 0.8rem; font-size: 1rem; }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <img src="/profile.jpg" class="profile-banner" alt="Profile Photo">
-      <h1>Jeff Joseph</h1>
-      <p>Award Winning Journalist and visual storyteller. Grantee of Pulitzer Center, Earth Journalism Network, and OCRI.</p>
-    </header>
-
-    <nav>
-      <a href="#articles">Articles</a>
-      <a href="#videos">Videos</a>
-      <a href="#photos">Photos</a>
-    </nav>
-
-    <section id="articles">
-      <h2>Articles</h2>
-      <ul class="article-list">
-        {articles.map(article => (
-          <li>
-            <img src={`https://image.thum.io/get/width/300/crop/600/${article.url}`} alt={article.title} loading="lazy" />
-            <div>
-              <a href={article.url} target="_blank">
-                <strong>{article.title}</strong><br />
-                <span style="font-variant: small-caps; font-size: 0.95rem; color: #666;">{article.source}</span>
-              </a>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section id="videos">
-      <h2>Videos</h2>
-      <div class="videos">
-        {videos.map(video => (
-          <div class="video">
-            <a href={video.url} target="_blank">
-              <img src={video.thumbnail} alt={video.title} loading="lazy" />
-              <p>{video.title}</p>
-              <span style="display: inline-block; margin-top: 0.3rem; font-size: 0.8rem; background: #eee; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: bold; color: #444;">
-                {video.url.includes('youtube.com') ? 'YouTube' : 'Video'}
-              </span>
-            </a>
-          </div>
-        ))}
+<section id="videos">
+  <h2>Videos</h2>
+  <div class="videos">
+    {videos.map(video => (
+      <div class="video">
+        <a href={video.url} target="_blank" style="text-decoration: none;">
+          <img src={video.thumbnail} alt={video.title} loading="lazy" />
+          <p style="text-decoration: none;">{video.title}</p>
+        </a>
       </div>
-    </section>
+    ))}
+  </div>
+</section>
 
-  <section id="photos">
+<section id="photos">
   <h2>Photos</h2>
   <div class="photos" id="photo-gallery"></div>
 </section>
 
-<div id="lightbox" onclick="closeModal()">
-  <img id="lightbox-img" />
-</div>
-
 <script>
-  // Dynamically load photos from public/photos/IMG_1.jpg to IMG_10.jpg
-  const totalPhotos = 10; // change this number to match your actual count
   const gallery = document.getElementById('photo-gallery');
+  const possiblePhotos = Array.from({length: 10}, (_, i) => `/photos/IMG_${i+1}.jpg`);
 
-  for (let i = 1; i <= totalPhotos; i++) {
-    const figure = document.createElement('figure');
-    const img = document.createElement('img');
-    img.src = `./photos/IMG_${i}.jpg`;
-    img.alt = `Portfolio Photo ${i}`;
-    img.loading = 'lazy';
-    img.onclick = () => openModal(img.src);
-    figure.appendChild(img);
-    gallery.appendChild(figure);
-  }
+  possiblePhotos.forEach(path => {
+    const img = new Image();
+    img.src = path;
+    img.onload = () => {
+      const figure = document.createElement('figure');
+      img.alt = "Portfolio Photo";
+      img.loading = 'lazy';
+      img.onclick = () => openModal(img.src);
+      figure.appendChild(img);
+      gallery.appendChild(figure);
+    };
+  });
 
   function openModal(src) {
     document.getElementById('lightbox-img').src = src;
@@ -300,6 +133,7 @@ const photos = [
     height: auto;
     cursor: pointer;
     border-radius: 8px;
+    object-fit: cover;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   #lightbox {
@@ -318,6 +152,3 @@ const photos = [
     border-radius: 8px;
   }
 </style>
-    </script>
-  </body>
-</html>
