@@ -252,49 +252,55 @@ const photos = [
       </div>
     </section>
 
-    <section id="photos">
-      <h2>Photos</h2>
-      <div class="photos" id="public"></div>
-    </section>
+<section id="photos">
+  <h2>Photos</h2>
+  <div class="photos" id="public"></div>
+</section>
 
-    <div id="lightbox" onclick="closeModal()">
-      <img id="lightbox-img" />
-    </div>
+<div id="lightbox" onclick="closeModal()">
+  <img id="lightbox-img" />
+</div>
 
-    <script>
-      const gallery = document.getElementById('public');
-      const photoPaths = [
-        "/photos/IMG_1.jpg",
-        "/photos/IMG_2.jpg",
-        "/photos/IMG_3.jpg",
-        "/photos/IMG_4.jpg",
-        "/photos/IMG_5.jpg",
-        "/photos/IMG_6.jpg",
-        "/photos/IMG_7.jpg",
-        "/photos/IMG_8.jpg",
-        "/photos/IMG_9.jpg",
-        "/photos/IMG_10.jpg"
-      ];
+<style>
+  /* All the CSS from previous answer */
+</style>
 
-      photoPaths.forEach(path => {
-        const img = new Image();
-        img.src = path;
-        img.loading = 'lazy';
-        img.style.maxWidth = '100%';
-        img.onclick = () => openModal(path);
-        img.onload = () => gallery.appendChild(img);
-      });
+<script is:client="load">
+  const gallery = document.getElementById('public');
+  const photoPaths = [
+    "/photos/IMG_1.jpg",
+    "/photos/IMG_2.jpg",
+    "/photos/IMG_3.jpg",
+    "/photos/IMG_4.jpg",
+    "/photos/IMG_5.jpg",
+    "/photos/IMG_6.jpg",
+    "/photos/IMG_7.jpg",
+    "/photos/IMG_8.jpg",
+    "/photos/IMG_9.jpg",
+    "/photos/IMG_10.jpg"
+  ];
 
-      function openModal(src) {
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
-        lbImg.src = src;
-        lb.style.display = 'flex';
-      }
+  photoPaths.forEach(path => {
+    const box = document.createElement('div');
+    box.className = 'photo-box';
 
-      function closeModal() {
-        document.getElementById('lightbox').style.display = 'none';
-      }
-    </script>
-  </body>
-</html>
+    const img = new Image();
+    img.src = path;
+    img.loading = 'lazy';
+    img.onclick = () => openModal(path);
+
+    img.onload = () => box.appendChild(img);
+    gallery.appendChild(box);
+  });
+
+  function openModal(src) {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = src;
+    lb.style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+</script>
